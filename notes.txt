@@ -1,0 +1,76 @@
+
+Docker is a platform for developing, shipping,
+and running applications in containers.
+Containers are lightweight, standalone, and
+executable packages that include everything
+needed to run a piece of software, including
+the code, runtime, libraries, and system tools.
+Docker provides a consistent environment
+across different development, testing, and
+production environments, making it easier to
+deploy and scale applications.
+
+Here are key concepts related to Docker:
+
+1. Docker Image
+   - An image is a lightweight, stand-alone,
+   and executable package that includes
+   the application and all its dependencies
+   (such as libraries, binaries, and configuration files).
+   - Images are used to create containers.
+   They are often built from a set of instructions
+   contained in a Dockerfile.
+
+2. Dockerfile
+   - A Dockerfile is a script that contains
+   instructions for building a Docker image.
+   It specifies the base image, sets up the
+   environment, and defines how the application
+   should be configured and run.
+
+3. Container
+   - A container is an instance of a Docker
+   image. It encapsulates the application and
+   its dependencies, ensuring consistency and
+   reproducibility across different environments.
+   - Containers run in isolated user spaces
+   on the host operating system but share the same
+   kernel. This makes them lightweight and
+   efficient.
+
+4. Docker Hub
+   - Docker Hub is a cloud-based registry
+   where Docker images can be stored, shared,
+   and distributed. It serves as a centralized
+   repository for Docker images.
+
+5. Registry
+   - A registry is a service that stores and
+   manages Docker images.
+   Docker Hub is a public registry, but
+   organizations can set up private registries for internal use.
+
+Using Docker, developers can package their
+applications along with dependencies into containers,
+and these containers can run consistently
+on any system that supports Docker. This approach helps
+to eliminate the "it works on my machine"
+problem and streamlines the process of deploying and scaling applications.
+
+The popularity of Docker has led to the widespread
+adoption of containerization as a deployment
+and packaging technology. Other container orchestration
+tools, such as Kubernetes, can be used to manage
+and scale applications composed of multiple containers.
+Containerization has become a key technology
+in the DevOps landscape, providing a standardized and
+efficient way to package, distribute, and run applications.
+
+Why containers?
+- it's faster to deploying smaller units
+- it uses fewer resources
+- faster automation
+- portability
+- isolation from each other
+
+
