@@ -74,3 +74,6 @@ Why containers?
 - isolation from each other
 
 
+
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock

@@ -5,7 +5,7 @@ RUN apt-get update && apt-get upgrade && \
 	apt-get install -y git make gcc && \
 	git clone https://github.com/Smafl/philosophers.git
 
-WORKDIR philosophers
+WORKDIR /philosophers
 
 RUN make
 
