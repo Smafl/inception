@@ -19,8 +19,6 @@ COPY my.cnf /etc/mysql/my.cnf
 # Initialize MariaDB database
 RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
-WORKDIR /MariaDB
-
 #HEALTHCHECK --start-period=5m \
 #  CMD mariadb -e 'SELECT @@datadir;' || exit 1
 
