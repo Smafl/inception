@@ -1,6 +1,6 @@
 
 # Use the Alpine Linux base image
-FROM alpine:latest
+FROM alpine:3.18
 
 # Install MariaDB server and client
 RUN apk --no-cache add mariadb mariadb-client
