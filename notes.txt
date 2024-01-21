@@ -1,4 +1,6 @@
 
+*** DOCKER ***
+
 ➤ to get info
 $ docker info
 
@@ -96,3 +98,13 @@ Why containers?
 - faster automation
 - portability
 - isolation from each other
+
+*** MARIADB ***
+
+- run a container in background
+$ docker run -e MYSQL_ROOT_PASSWORD=your_root_password -e MYSQL_DATABASE=wordpress_db -p 3306:3306 --name=container_name -d image_name
+$ docker exec -it container_name mysql -u root -p
+
+CREATE USER 'your_wordpress_user'@'%' IDENTIFIED BY 'your_wordpress_password';
+GRANT ALL PRIVILEGES ON wordpress_db.* TO 'your_wordpress_user'@'%';
+FLUSH PRIVILEGES;

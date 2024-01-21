@@ -1,15 +1,19 @@
 
 # Use the Alpine Linux base image
 FROM alpine:3.18
+#FROM debian
 
 # Install MariaDB server and client
-RUN apk --no-cache add mariadb mariadb-client
+RUN apk --no-cache add mariadb mariadb-client mysql
 
 # Create a directory for MariaDB data
 RUN mkdir -p /var/lib/mysql && \
-    mkdir -p /var/run/mysql && \
+    mkdir -p /var/run/mysqld && \
     chown -R mysql:mysql /var/lib/mysql && \
-    chown -R mysql:mysql /var/run/mysql
+    chown -R mysql:mysql /var/run/mysqld
+
+COPY entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 EXPOSE 3306
 
@@ -23,4 +27,5 @@ RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
 #  CMD mariadb -e 'SELECT @@datadir;' || exit 1
 
 # Start MariaDB
-CMD ["mysqld", "--user=mysql"]
+#CMD ["mysqld", "--user=mysql"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
