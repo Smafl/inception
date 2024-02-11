@@ -108,3 +108,60 @@ $ docker exec -it container_name mysql -u root -p
 CREATE USER 'your_wordpress_user'@'%' IDENTIFIED BY 'your_wordpress_password';
 GRANT ALL PRIVILEGES ON wordpress_db.* TO 'your_wordpress_user'@'%';
 FLUSH PRIVILEGES;
+
+*** DOCKER COMPOSE ***
+
+Docker Compose builds a stack of applications to run a complete service.
+The docker-compose.yml file is broken into sections,
+each section represents a single container which,
+when combined with the other containers, create the service.
+
+Multiple Compose files can be merged together to define the application model.
+
+➤ build the stack
+$ docker compose up
+	# use -d for running in detached mode
+
+➤ list of running containers
+& docker compose ps
+	# use -a for list of all containers
+
+DOCKER COMPOSE FILE EXAMPLE
+
+version: '3'						[specify the version of the Docker Compose file syntax being used]
+services:							[services which are going to build]
+  mariadb:							[this service has name "mariadb", here can be any name]
+	container_name: mariadb			[set a container name]
+    build: ./requirements/mariadb	[define configuration options that are applied by Compose to build Docker images from source. Here it's a path directly to Dockerfile]
+    image: mariadb					[here it's name for image but it can be image from Hub and docker will pull it: image: 'node:6-alpine']
+    ports:							[this line maps port 3306 on the host machine to port 3306 on the container. This allows external applications to communicate with the MariaDB server running inside the container]
+      - 3306:3306
+    expose:							[]
+      - 3306
+    env_file:						[specify a file containing environment variables]
+      - .env
+	environment:					[this option allows to directly specify environment variables in the Docker Compose file itself]
+	  - NODE_ENV=production
+    restart: unless-stopped			[specify the restart policy for containers managed by Docker Compose]
+
+Here's how the restart option works:
+
+no: This is the default behavior.
+Containers won't be restarted automatically, regardless of the exit status.
+
+always: Docker will always restart the container if it stops,
+regardless of the exit status. This is useful for critical services
+that should always be running.
+
+on-failure: Docker will only restart the container if
+it exits with a non-zero exit status. If the container stops for any other
+reason (like being manually stopped), it won't be restarted.
+This is useful for services that might encounter occasional failures
+but should generally be running.
+
+unless-stopped: Docker will restart the container unless it has been
+explicitly stopped by the user (using docker-compose stop or a similar command).
+This is useful for services that should be running continuously unless deliberately stopped.
+
+docker exec -it mariadb sh
+mysql -u$WP_DB_USER -p$WP_DB_PASS

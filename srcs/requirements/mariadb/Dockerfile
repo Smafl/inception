@@ -1,7 +1,6 @@
 
 # Use the Alpine Linux base image
 FROM alpine:3.18
-#FROM debian
 
 # Install MariaDB server and client
 RUN apk --no-cache add mariadb mariadb-client mysql
@@ -14,8 +13,6 @@ RUN mkdir -p /var/lib/mysql && \
 
 COPY tools/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
-
-EXPOSE 3306
 
 # Copy custom MariaDB configuration file
 COPY conf/my.cnf /etc/mysql/my.cnf
