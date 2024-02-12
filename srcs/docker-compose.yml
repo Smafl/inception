@@ -1,5 +1,15 @@
 version: '3'
 services:
+  nginx:
+    build: ./requirements/nginx
+    image: nginx
+    container_name: nginx
+    ports:
+      - 443:443
+    env_file:
+      - .env
+    restart: unless-stopped
+
   mariadb:
     build: ./requirements/mariadb
     image: mariabd

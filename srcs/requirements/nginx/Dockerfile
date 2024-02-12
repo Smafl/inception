@@ -10,9 +10,10 @@ RUN apk --no-cache add nginx openssl
 RUN mkdir -p /var/log/nginx
 
 # Copy Nginx configuration file
-COPY conf/nginx.conf /etc/nginx/nginx.conf
+# COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 443
 
 # Start Nginx when the container starts
 CMD ["nginx", "-g", "daemon off;"]
+# CMD sh
