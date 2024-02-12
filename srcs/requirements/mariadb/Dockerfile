@@ -1,9 +1,12 @@
 
-# Use the Alpine Linux base image
-FROM alpine:3.18
+FROM debian:bullseye
 
-# Install MariaDB server and client
-RUN apk --no-cache add mariadb mariadb-client mysql
+	# Update package lists and upgrade installed packages
+RUN apt update -y && apt upgrade -y
+    # Install MariaDB server and client without recommended packages
+RUN apt install -y mariadb-server mariadb-client
+    # Clean up apt cache to reduce image size
+    # apt clean && rm -rf /var/lib/apt/lists/*
 
 # Create a directory for MariaDB data
 RUN mkdir -p /var/lib/mysql && \
@@ -15,13 +18,10 @@ COPY tools/entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Copy custom MariaDB configuration file
-COPY conf/my.cnf /etc/mysql/my.cnf
+COPY conf/my.cnf /etc/my.cnf
 
 # Initialize MariaDB database
-RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
-
-#HEALTHCHECK --start-period=5m \
-#  CMD mariadb -e 'SELECT @@datadir;' || exit 1
+RUN mysql_install_db
 
 # Start MariaDB
 #CMD ["mysqld", "--user=mysql"]

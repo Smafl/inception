@@ -1,11 +1,12 @@
 version: '3'
 services:
   mariadb:
-    container_name: mariadb
     build: ./requirements/mariadb
     image: mariabd
+    container_name: mariadb
     expose:
       - 3306
     env_file:
       - .env
     restart: unless-stopped
+

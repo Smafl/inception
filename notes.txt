@@ -35,6 +35,9 @@ $ docker rmi image_name
 ➤ delete all unused images
 $ docker image prune
 
+➤ delete all images
+$ docker rmi $(docker images -q)
+
 3. Container
    - A container is an instance of a Docker
    image. It encapsulates the application and
@@ -121,6 +124,7 @@ Multiple Compose files can be merged together to define the application model.
 ➤ build the stack
 $ docker compose up
 	# use -d for running in detached mode
+	# use --build for re-build (it builds a new image)
 
 ➤ list of running containers
 & docker compose ps
@@ -131,9 +135,9 @@ DOCKER COMPOSE FILE EXAMPLE
 version: '3'						[specify the version of the Docker Compose file syntax being used]
 services:							[services which are going to build]
   mariadb:							[this service has name "mariadb", here can be any name]
-	container_name: mariadb			[set a container name]
     build: ./requirements/mariadb	[define configuration options that are applied by Compose to build Docker images from source. Here it's a path directly to Dockerfile]
-    image: mariadb					[here it's name for image but it can be image from Hub and docker will pull it: image: 'node:6-alpine']
+    image: 'node:6-alpine'			[pull image from Hub]
+	container_name: mariadb			[set a container name]
     ports:							[this line maps port 3306 on the host machine to port 3306 on the container. This allows external applications to communicate with the MariaDB server running inside the container]
       - 3306:3306
     expose:							[]
@@ -163,5 +167,41 @@ unless-stopped: Docker will restart the container unless it has been
 explicitly stopped by the user (using docker-compose stop or a similar command).
 This is useful for services that should be running continuously unless deliberately stopped.
 
+*** OpenSSL ***
+
+OpenSSL is a widely used open-source software library that
+provides cryptographic functions and utilities.
+
+*** clean and restart pc ***
+
+rm -Rf /Applications/Docker.app
+rm -f /usr/local/bin/docker
+rm -f /usr/local/bin/docker-machine
+rm -f /usr/local/bin/com.docker.cli
+rm -f /usr/local/bin/docker-compose
+rm -f /usr/local/bin/docker-compose-v1
+rm -f /usr/local/bin/docker-credential-desktop
+rm -f /usr/local/bin/docker-credential-ecr-login
+rm -f /usr/local/bin/docker-credential-osxkeychain
+rm -f /usr/local/bin/hub-tool
+rm -f /usr/local/bin/hyperkit
+rm -f /usr/local/bin/kubectl.docker
+rm -f /usr/local/bin/vpnkit
+rm -Rf ~/.docker
+rm -Rf ~/Library/Containers/com.docker.docker
+rm -Rf ~/Library/Application\ Support/Docker\ Desktop
+rm -Rf ~/Library/Group\ Containers/group.com.docker
+rm -f ~/Library/HTTPStorages/com.docker.docker.binarycookies
+rm -f /Library/PrivilegedHelperTools/com.docker.vmnetd
+rm -f /Library/LaunchDaemons/com.docker.vmnetd.plist
+rm -Rf ~/Library/Logs/Docker\ Desktop
+rm -Rf /usr/local/lib/docker
+rm -f ~/Library/Preferences/com.docker.docker.plist
+rm -Rf ~/Library/Saved\ Application\ State/com.electron.docker-frontend.savedState
+rm -f ~/Library/Preferences/com.electron.docker-frontend.plist
+
+*** other ***
+
 docker exec -it mariadb sh
 mysql -u$WP_DB_USER -p$WP_DB_PASS
+
