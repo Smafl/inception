@@ -1,11 +1,19 @@
 version: '3'
+
+networks:
+  inception:
+    name: inception
+    driver: bridge
+
 services:
   nginx:
     build: ./requirements/nginx
     image: nginx
     container_name: nginx
+    networks:
+      - inception
     ports:
-      - 443:443
+      - 80:80 #443:443
     env_file:
       - .env
     restart: unless-stopped
@@ -14,6 +22,8 @@ services:
     build: ./requirements/mariadb
     image: mariabd
     container_name: mariadb
+    networks:
+      - inception
     expose:
       - 3306
     env_file:

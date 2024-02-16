@@ -3,6 +3,8 @@
 # Start MySQL service in the background
 service mariadb start
 
+sleep 10
+
 # Create MySQL user and grant privileges
 mysql -u root -p$ROOT_PASS -e "CREATE DATABASE IF NOT EXISTS ${WP_DB_NAME};"
 mysql -u root -p$ROOT_PASS -e "CREATE USER '${WP_DB_USER}'@'%' IDENTIFIED BY '${WP_DB_PASS}';"
