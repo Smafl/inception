@@ -12,8 +12,10 @@ services:
     container_name: nginx
     networks:
       - inception
+    depends_on:
+      - wordpress
     ports:
-      - 80:80 #443:443
+      - 443:443
     env_file:
       - .env
     restart: unless-stopped
@@ -30,3 +32,16 @@ services:
       - .env
     restart: unless-stopped
 
+  wordpress:
+    build: ./requirements/wordpress
+    image: wordpress
+    container_name: wordpress
+    networks:
+      - inception
+    depends_on:
+      - mariadb
+    expose:
+      - 9000
+    env_file:
+      - .env
+    restart: unless-stopped
