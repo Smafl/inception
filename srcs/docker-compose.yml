@@ -1,9 +1,17 @@
+
 version: '3'
 
 networks:
   inception:
     name: inception
     driver: bridge
+
+volumes:
+  mariadb:
+    driver: local
+
+  wordpress:
+    driver: local
 
 services:
   nginx:
@@ -22,10 +30,12 @@ services:
 
   mariadb:
     build: ./requirements/mariadb
-    image: mariabd
+    image: mariadb
     container_name: mariadb
     networks:
       - inception
+    volumes:
+      - mariadb:/var/lib/mysql
     expose:
       - 3306
     env_file:
@@ -40,6 +50,8 @@ services:
       - inception
     depends_on:
       - mariadb
+    volumes:
+      - wordpress:/var/www/html
     expose:
       - 9000
     env_file:
