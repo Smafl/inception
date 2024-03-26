@@ -6,17 +6,19 @@
 #   sleep 1
 # done
 
+echo "cutie pie"
+
+while ! mysqladmin ping -h "mariadb" -P"3306" -u"$DB_USER" -p"$DB_PASS" --silent 2>/dev/null; do
+	echo "Waiting for MySQL to be ready..."
+	sleep 1
+done
+
 cd "/var/www/html"
 
 # Download WordPress
 wp core download --allow-root
 # Set permissions
 chmod -R 0755 wp-content/
-
-# Check if the database exists before creating
-if ! wp db check --allow-root; then
-    wp db create --allow-root && echo "Database created"
-fi
 
 # Create wp-config.php
 wp config create \
@@ -25,6 +27,11 @@ wp config create \
 	--dbpass=${DB_PASS} \
 	--dbhost=mariadb \
 	--allow-root && echo "wp-config.php created"
+
+# Check if the database exists before creating
+# if ! wp db check --allow-root; then
+#     wp db create --allow-root && echo "Database created"
+# fi
 
 # Install WordPress
 wp core install \

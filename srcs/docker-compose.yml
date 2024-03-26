@@ -7,11 +7,17 @@ networks:
     driver: bridge
 
 volumes:
-  mariadb:
-    driver: local
-
   wordpress:
-    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $HOME/data/wordpress
+
+  mariadb:
+    driver_opts:
+      type: none
+      o: bind
+      device: $HOME/data/mariadb
 
 services:
   nginx:

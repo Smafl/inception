@@ -5,6 +5,7 @@ RUN apt update -y && apt upgrade -y
 RUN apt-get install -y \
 	curl \
 	php7.4 \
+	php-cgi \
 	php-fpm \
 	php-mysql \
 	mariadb-client \
