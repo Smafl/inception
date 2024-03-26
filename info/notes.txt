@@ -213,4 +213,3 @@ rm -f ~/Library/Preferences/com.electron.docker-frontend.plist
 
 docker exec -it mariadb sh
 mysql -u$WP_DB_USER -p$WP_DB_PASS
-
