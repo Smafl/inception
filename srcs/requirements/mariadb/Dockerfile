@@ -1,4 +1,3 @@
-
 FROM debian:bullseye
 
 # Update package lists and upgrade installed packages
@@ -12,7 +11,7 @@ RUN mkdir -p /var/lib/mysql && \
     chown -R mysql:mysql /var/lib/mysql && \
     chown -R mysql:mysql /var/run/mysqld
 
-COPY tools/entrypoint.sh /usr/local/bin/
+COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Copy custom MariaDB configuration file
