@@ -9,7 +9,7 @@ networks:
 volumes:
   wordpress:
     driver_opts:
-      type: none # specifies that Docker should not manage this volume
+      type: none
       o: bind # indicates that it's a bind mount, where a directory from the host machine is mounted into the container
       device: /Users/ekulichk/data/wordpress
 
