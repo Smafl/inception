@@ -11,14 +11,13 @@ volumes:
     driver_opts:
       type: none # specifies that Docker should not manage this volume
       o: bind # indicates that it's a bind mount, where a directory from the host machine is mounted into the container
-      # device: $HOME/data/wordpress
-      device: /Users/elenakulichkova/data/wordpress
+      device: /Users/ekulichk/data/wordpress
 
   mariadb:
     driver_opts:
       type: none
       o: bind
-      device: /Users/elenakulichkova/data/mariadb
+      device: /Users/ekulichk/data/mariadb
 
 services:
   nginx:

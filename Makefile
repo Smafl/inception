@@ -1,10 +1,9 @@
 
 include srcs/.env
-export
 
 all:
-	mkdir -p /Users/elenakulichkova/data/mariadb
-	mkdir -p /Users/elenakulichkova/data/wordpress
+	mkdir -p /Users/ekulichk/data/mariadb
+	mkdir -p /Users/ekulichk/data/wordpress
 	docker-compose -f srcs/docker-compose.yml -p inception up --build -d --remove-orphans
 
 clean:
@@ -12,8 +11,8 @@ clean:
 
 prune: clean
 	docker system prune -af
-	rm -rf /Users/elenakulichkova/data/mariadb
-	rm -rf /Users/elenakulichkova/data/wordpress
+	rm -rf /Users/ekulichk/data/mariadb
+	rm -rf /Users/ekulichk/data/wordpress
 
 re: clean all
 

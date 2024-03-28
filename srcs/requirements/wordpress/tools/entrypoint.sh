@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Wait for MySQL to be ready
-# until mysqladmin ping -h mariadb -P 3306 --silent; do
-#   echo 'Waiting for MySQL to be ready...'
-#   sleep 1
-# done
-
-# echo "cutie pie"
-
 while ! mysqladmin ping -h "$DB_HOST" -P"3306" -u"$DB_USER" -p"$DB_PASS" --silent 2>/dev/null; do
 	echo "Waiting for MySQL to be ready..."
 	sleep 1
@@ -27,11 +19,6 @@ wp config create \
 	--dbpass=${DB_PASS} \
 	--dbhost=${DB_HOST} \
 	--allow-root && echo "wp-config.php created"
-
-# Check if the database exists before creating
-# if ! wp db check --allow-root; then
-#     wp db create --allow-root && echo "Database created"
-# fi
 
 # Install WordPress
 wp core install \
