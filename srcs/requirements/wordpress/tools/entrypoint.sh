@@ -8,7 +8,7 @@
 
 echo "cutie pie"
 
-while ! mysqladmin ping -h "mariadb" -P"3306" -u"$DB_USER" -p"$DB_PASS" --silent 2>/dev/null; do
+while ! mysqladmin ping -h "$DB_HOST" -P"3306" -u"$DB_USER" -p"$DB_PASS" --silent 2>/dev/null; do
 	echo "Waiting for MySQL to be ready..."
 	sleep 1
 done
@@ -25,7 +25,7 @@ wp config create \
 	--dbname=${DB_NAME} \
 	--dbuser=${DB_USER} \
 	--dbpass=${DB_PASS} \
-	--dbhost=mariadb \
+	--dbhost=${DB_HOST} \
 	--allow-root && echo "wp-config.php created"
 
 # Check if the database exists before creating

@@ -7,7 +7,12 @@ RUN apk update && apk upgrade
 RUN apk --no-cache add nginx openssl
 
 # Create a directory for Nginx logs
-RUN mkdir -p /var/log/nginx
+RUN mkdir -p /var/log/nginx && \
+	mkdir -p /etc/nginx/ssl
+RUN openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+	-keyout /etc/nginx/ssl/nginx.key \
+	-out /etc/nginx/ssl/nginx.crt \
+	-subj "/C=DE/ST=BW/L=Heilbronn/O=42Heilbronn/CN=www.ekulichk.42.fr"
 
 # Copy Nginx configuration file
 COPY conf/nginx.conf /etc/nginx/nginx.conf
