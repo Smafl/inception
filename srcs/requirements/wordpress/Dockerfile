@@ -22,12 +22,9 @@ RUN mkdir -p /run/php
 
 # Change php fpm configuration
 RUN chmod +x /tmp/entrypoint.sh && \
-    sed -i "s|listen = 127.0.0.1:9000|listen = 9000|g" \
-    /etc/php/7.4/fpm/pool.d/www.conf && \
-    sed -i "s|;listen.owner = nobody|listen.owner = nobody|g" \
-    /etc/php/7.4/fpm/pool.d/www.conf && \
-    sed -i "s|;listen.group = nobody|listen.group = nobody|g" \
-    /etc/php/7.4/fpm/pool.d/www.conf && \
+    sed -i "s|listen = /run/php/php7.4-fpm.sock|listen = 9000|g" /etc/php/7.4/fpm/pool.d/www.conf && \
+    sed -i "s|listen.owner = www-data|listen.owner = nobody|g" /etc/php/7.4/fpm/pool.d/www.conf && \
+    sed -i "s|listen.group = www-data|listen.group = nobody|g" /etc/php/7.4/fpm/pool.d/www.conf && \
     rm -f /var/cache/apk/*
 
 ENTRYPOINT ["/tmp/entrypoint.sh"]

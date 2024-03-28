@@ -6,7 +6,7 @@
 #   sleep 1
 # done
 
-echo "cutie pie"
+# echo "cutie pie"
 
 while ! mysqladmin ping -h "$DB_HOST" -P"3306" -u"$DB_USER" -p"$DB_PASS" --silent 2>/dev/null; do
 	echo "Waiting for MySQL to be ready..."

@@ -15,7 +15,7 @@ COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # Copy custom MariaDB configuration file
-COPY conf/50-server.cnf /etc/50-server.cnf
+COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # Initialize MariaDB database
 RUN mysql_install_db
