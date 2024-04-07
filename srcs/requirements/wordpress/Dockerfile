@@ -1,4 +1,3 @@
-
 FROM debian:bullseye
 
 RUN apt update -y && apt upgrade -y
@@ -10,6 +9,8 @@ RUN apt-get install -y \
 	php-mysql \
 	mariadb-client \
     && rm -rf /var/lib/apt/lists/*
+
+COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 RUN curl -o /usr/local/bin/wp https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x /usr/local/bin/wp

@@ -212,4 +212,8 @@ rm -f ~/Library/Preferences/com.electron.docker-frontend.plist
 *** other ***
 
 docker exec -it mariadb sh
-mysql -u$WP_DB_USER -p$WP_DB_PASS
+mysql -u$DB_USER -p$DB_PASS
+
+scp -r -P 4242 -v /Users/ekulichk/Desktop/Smafl/Git_Smafl/inception smafl@localhost:/home/smafl
+ssh smafl@localhost -p 4242
+

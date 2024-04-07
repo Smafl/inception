@@ -1,4 +1,3 @@
-
 FROM debian:bullseye
 
 # Update package lists and upgrade installed packages
@@ -15,11 +14,13 @@ RUN mkdir -p /var/lib/mysql && \
 COPY tools/entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+
 # Copy custom MariaDB configuration file
 COPY conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
 # Initialize MariaDB database
-RUN mysql_install_db
+# RUN mysql_install_db
+EXPOSE 3306
 
 # Start MariaDB
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
