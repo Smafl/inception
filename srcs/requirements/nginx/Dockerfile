@@ -1,4 +1,3 @@
-
 # Use the Alpine Linux base image
 FROM alpine:3.18
 
