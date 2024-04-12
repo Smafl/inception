@@ -14,6 +14,6 @@ prune: clean
 	rm -rf /home/ekulichk/data/mariadb
 	rm -rf /home/ekulichk/data/wordpress
 
-re: clean all
+re: prune all
 
-.PHONY: all clean re
+.PHONY: all clean re prune down
