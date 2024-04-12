@@ -14,7 +14,8 @@ mysql -u root -p$ROOT_PASS -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${RO
 mysql -u root -p$ROOT_PASS -e "FLUSH PRIVILEGES;"
 
 # Stop MySQL service in the background
-mysqladmin -u root -p$ROOT_PASS shutdown
+service mariadb stop
+# mysqladmin -u root -p$ROOT_PASS shutdown
 
 # Run MySQL service in the foreground
 mysqld_safe
